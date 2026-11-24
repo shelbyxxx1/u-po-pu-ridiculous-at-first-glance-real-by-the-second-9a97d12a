@@ -25,6 +25,8 @@ def main() -> int:
         raise SystemExit("entry.txt would fail the gate: bad length")
     if pitch.count(".") != 1 or not pitch.endswith("."):
         raise SystemExit("entry must be exactly one sentence")
+    if "\n" in pitch or "\r" in pitch:
+        raise SystemExit("entry must be a single line, no line breaks")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
